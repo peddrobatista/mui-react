@@ -1,24 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Routes, Route, Outlet, Link } from "react-router-dom";
+import Hello from './pages/Hello';
+import Botao from './pages/Botao';
+import { Divider, List, ListItem,ListItemButton, ListItemText} from "@mui/material";
 
-function App() {
+const Menu = () => { 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <nav>
+                <ul>
+                    <li>
+                        <Link to="Hello">Hello</Link>
+                    </li>
+                    <li>
+                        <Link to="Botao">Botao</Link>
+                    </li>
+                </ul>
+    </nav>
+    <Divider/>
+    <nav>
+      <List>
+          <ListItem disablePadding>
+            <ListItemButton component="a" href="Hello">
+              <ListItemText primary="Hello" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton component="a" href="Botao">
+              <ListItemText primary="Botao" />
+            </ListItemButton>
+          </ListItem>
+      </List>
+    </nav>
+    <Divider/>
+    <Outlet/>
+    </>
+    
+  );
+  
+}
+const App = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Menu/>}>
+          <Route path="Botao" element={<Botao/>}/>
+          <Route path="Hello" element={<Hello/>}/>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
